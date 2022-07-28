@@ -1,13 +1,8 @@
 import React, { useState } from "react";
-import {
-  View,
-  StyleSheet,
-  TextInput,
-  Modal,
-  Button,
-  Alert,
-} from "react-native";
+import { View, StyleSheet, TextInput, Modal, Alert } from "react-native";
+import { AntDesign, FontAwesome } from "@expo/vector-icons";
 import { THEME } from "../theme";
+import { AppButton } from "./ui/AppButton";
 
 export const EditModal = ({ visible, onCancel, value, onSave }) => {
   const [title, setTitle] = useState(value);
@@ -24,7 +19,7 @@ export const EditModal = ({ visible, onCancel, value, onSave }) => {
   };
 
   return (
-    <Modal visible={visible} animationType="slide" transparent={true}>
+    <Modal visible={visible} animationType="slide" transparent={false}>
       <View style={styles.wrap}>
         <TextInput
           style={styles.input}
@@ -34,12 +29,12 @@ export const EditModal = ({ visible, onCancel, value, onSave }) => {
           onChangeText={setTitle}
         />
         <View style={styles.buttons}>
-          <Button
-            title="Отменить"
-            onPress={onCancel}
-            color={THEME.GREY_COLOR}
-          />
-          <Button title="Сохранить" onPress={saveHandler} />
+          <AppButton onPress={onCancel} color={THEME.GREY_COLOR}>
+            <AntDesign name="back" size={20} color="#fff" />
+          </AppButton>
+          <AppButton onPress={saveHandler}>
+            <AntDesign name="checkcircleo" size={20} color="#fff" />
+          </AppButton>
         </View>
       </View>
     </Modal>

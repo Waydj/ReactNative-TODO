@@ -1,10 +1,12 @@
 import React, { useState } from "react";
-import { Button, StyleSheet, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { EditModal } from "../components/EditModal";
 import { AppCard } from "../components/ui/AppCard";
+import { AntDesign, FontAwesome } from "@expo/vector-icons";
 import { THEME } from "../theme";
 
 import { AppTextBold } from "../components/ui/AppTextBold";
+import { AppButton } from "../components/ui/AppButton";
 
 export const TodoView = ({ goBack, todo, onRemove, onSave }) => {
   const [modal, setModal] = useState(false);
@@ -24,18 +26,23 @@ export const TodoView = ({ goBack, todo, onRemove, onSave }) => {
       />
       <AppCard style={styles.card}>
         <AppTextBold style={styles.text}>{todo.title}</AppTextBold>
-        <Button title="Ред." onPress={() => setModal(!modal)} />
+        <AppButton onPress={() => setModal(!modal)}>
+          <FontAwesome name="edit" size={20} />
+        </AppButton>
       </AppCard>
       <View style={styles.buttons}>
         <View style={styles.button}>
-          <Button title="Назад" onPress={goBack} color={THEME.GREY_COLOR} />
+          <AppButton onPress={goBack} color={THEME.GREY_COLOR}>
+            <AntDesign name="back" size={20} color="#fff" />
+          </AppButton>
         </View>
         <View style={styles.button}>
-          <Button
-            title="Удалить"
+          <AppButton
             onPress={() => onRemove(todo.id)}
             color={THEME.DANGER_COLOR}
-          />
+          >
+            <FontAwesome name="remove" size={20} />
+          </AppButton>
         </View>
       </View>
     </View>
